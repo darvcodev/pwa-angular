@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "pwa-angular-2023"
+  },
+  "targets": {
+    "pwa-angular-2023": {
+      "hosting": {
+        "pwa-angular": [
+          "pwa-angular-2023"
+        ]
+      }
+    }
   }
 }
