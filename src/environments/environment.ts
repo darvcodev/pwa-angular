@@ -4,13 +4,13 @@
 
 export const environment = {
   firebase: {
-    apiKey: "AIzaSyAAEJL43L0Jns7BWL1meJ_jozUeLk14jNA",
-    authDomain: "pwa-angular-2023.firebaseapp.com",
-    projectId: "pwa-angular-2023",
-    storageBucket: "pwa-angular-2023.appspot.com",
-    messagingSenderId: "363981709882",
-    appId: "1:363981709882:web:72c9b1d8e02d6fc7d2cb03",
-    measurementId: "G-D1GP7C08HS"
+    projectId: 'pwa-angular-2023',
+    appId: '1:363981709882:web:72c9b1d8e02d6fc7d2cb03',
+    storageBucket: 'pwa-angular-2023.appspot.com',
+    apiKey: 'AIzaSyAAEJL43L0Jns7BWL1meJ_jozUeLk14jNA',
+    authDomain: 'pwa-angular-2023.firebaseapp.com',
+    messagingSenderId: '363981709882',
+    measurementId: 'G-D1GP7C08HS',
   },
 };
 

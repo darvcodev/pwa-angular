@@ -11,6 +11,11 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    provideMessaging(() => getMessaging())
   ],
   providers: [],
   bootstrap: [AppComponent]
