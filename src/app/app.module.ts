@@ -6,21 +6,23 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HeaderComponent } from './components/header/header.component';
 
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getMessaging, provideMessaging } from '@angular/fire/messaging';
+import { environment } from 'src/environments/environment';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
-  declarations: [ 
+  declarations: [
+    AppComponent,
     HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp({ projectId: 'pwa-angular-2023' })),
-    provideFirestore(() => getFirestore(getApp())),
-    provideMessaging(() => getMessaging(getApp())),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule,
+    AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

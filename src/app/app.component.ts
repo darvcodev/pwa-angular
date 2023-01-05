@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+
+interface Token {
+  token: string | null;
+}
 
 @Component({
   selector: 'app-root',
@@ -11,10 +19,15 @@ import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 export class AppComponent implements OnInit {
   title = 'PWA Angular';
 
+  private tokensCollections: AngularFirestoreCollection<Token>;
+
   constructor(
     private swUpdate: SwUpdate,
-    private messaging: AngularFireMessaging
-  ) {}
+    private afMessaging: AngularFireMessaging,
+    private database: AngularFirestore
+  ) {
+    this.tokensCollections = this.database.collection<Token>('tokens');
+  }
 
   ngOnInit() {
     this.updatePWA();
@@ -32,22 +45,22 @@ export class AppComponent implements OnInit {
     });
   };
 
-  requestPermission = () => {
-    this.messaging.requestToken.subscribe(
-      (token: any) => {
-        console.log(token);
+  requestPermission() {
+    this.afMessaging.requestToken.subscribe(
+      (token) => {
+        console.log('Permission granted! Save to the server!', token);
+        this.tokensCollections.add({ token });
       },
-      (err: any) => {
-        console.error('Unable to get permission to notify.', err);
+      (error) => {
+        console.error(error);
       }
     );
-  };
+  }
 
   listenNotifications = () => {
-    this.messaging.messages.subscribe((message) => {
+    this.afMessaging.messages.subscribe((message) => {
       console.log(message);
       // RUTA EN ESPECIFICO PARA VER PRODUCTO EJEMPLO
     });
-  }
-
+  };
 }
