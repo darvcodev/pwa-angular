@@ -48,19 +48,20 @@ export class AppComponent implements OnInit {
   requestPermission() {
     this.afMessaging.requestToken.subscribe(
       (token) => {
-        console.log('Permission granted! Save to the server!', token);
-        this.tokensCollections.add({ token });
+        console.log('token :' + token);
+        if (token != null) {
+          this.tokensCollections.add({ token });
+        }
       },
       (error) => {
-        console.error(error);
+        console.log('Permission error :' + error);
       }
     );
   }
 
-  listenNotifications = () => {
+  listenNotifications() {
     this.afMessaging.messages.subscribe((message) => {
       console.log(message);
-      // RUTA EN ESPECIFICO PARA VER PRODUCTO EJEMPLO
     });
-  };
+  }
 }

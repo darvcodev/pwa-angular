@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  production: false,
   firebase: {
     projectId: 'pwa-angular-2023',
     appId: '1:363981709882:web:72c9b1d8e02d6fc7d2cb03',
